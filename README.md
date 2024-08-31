@@ -51,6 +51,21 @@ It utilises computer vision to detect fire in real-time and sends alerts to a sp
    cargo clean
    cargo build
    ```
+   
+6. Test if it's compiled successfully:
+   ```bash
+   Compiling libc v0.2.158
+   Compiling once_cell v1.19.0
+   Compiling num-traits v0.2.19
+   Compiling clang-sys v1.8.1
+   Compiling jobserver v0.1.32
+   Compiling cc v1.1.15
+   Compiling clang v2.0.0
+   Compiling opencv-binding-generator v0.90.2
+   Compiling opencv v0.92.2
+   Compiling fire_detector_rust v0.1.0 (/home/path/path/fire_detector_rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 43.46s
+    ```
 
 ## Usage
 
