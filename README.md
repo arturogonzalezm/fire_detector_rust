@@ -2,55 +2,65 @@
 
 ## Description
 
-This project is a fire detector built using the Rust programming language. It is designed to detect fire and send an
-alert to a specified email address.
+This project implements a fire detection system using the Rust programming language. 
+It utilises computer vision to detect fire in real-time and sends alerts to a specified email address when a fire is detected.
 
 ## Features
 
-- Detects fire using a camera
-- Capture logs into database for monitoring and analysis purposes
+- Real-time fire detection using camera input
+- Email alerts when fire is detected
+- Logging of detection events to a database for monitoring and analysis
+- Built with Rust for high performance and safety
+
+## Prerequisites
+
+- Rust programming language (latest stable version)
+- Cargo package manager
+- LLVM and Clang libraries
+- (Add any other specific libraries or tools required)
 
 ## Installation
 
-To install and run this project, follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/arturogonzalezm/fire_detector_rust.git
+   cd fire_detector_rust
+   ```
 
-1. Clone the repository to your local machine.
-2. If you are using Linux Ubuntu run:
+2. Set up the required environment variables (for Linux Ubuntu):
+   ```bash
+   echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.bashrc
+   echo 'export LLVM_CONFIG_PATH=/usr/bin/llvm-config' >> ~/.bashrc
+   source ~/.bashrc
+   ```
 
-```bash
-nano ~/.bashrc
-```
+3. Install necessary dependencies:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install llvm-dev libclang-dev
+   ```
 
-```bash
-export LIBCLANG_PATH=/usr/lib/llvm-18/lib
-export LLVM_CONFIG_PATH=/usr/bin/llvm-config
-echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.bashrc
-echo 'export LLVM_CONFIG_PATH=/usr/bin/llvm-config' >> ~/.bashrc
+4. Verify the installation:
+   ```bash
+   which llvm-config
+   find /usr -name libclang.so
+   ```
 
-sudo apt-get update
-sudo apt-get install llvm-dev
-which llvm-config
-find /usr -name llvm-config
-export LLVM_CONFIG_PATH=/usr/bin/llvm-config
-sudo apt-get install libclang-dev
-```
+5. Build the project:
+   ```bash
+   cargo clean
+   cargo build
+   ```
 
-```bash
-source ~/.bashrc
-```
+## Usage
 
-```bash
-find /usr -name libclang.so
-```
+(Add instructions on how to run the program, including any command-line arguments or configuration files needed)
 
-```bash
-cargo clean 
-cargo build
-```
+## Configuration
 
-```bash
-C/snap/bin/cargo build --color=always --message-format=json-diagnostic-rendered-ansi --package fire_detector_rust --bin fire_detector_rust
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
-Process finished with exit code 0
-```
+(Explain how to configure the email alerts, adjust detection sensitivity, etc.)
+
+## Database Setup
+
+(Provide instructions on setting up and connecting to the database for logging)
 
