@@ -66,6 +66,11 @@ It utilises computer vision to detect fire in real-time and sends alerts to a sp
    Compiling fire_detector_rust v0.1.0 (/home/path/path/fire_detector_rust)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 43.46s
     ```
+   
+7. Run the project:
+    ```bash
+    cargo run
+    ```
 
 ## Usage
 
