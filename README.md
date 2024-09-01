@@ -2,22 +2,84 @@
 
 ## Description
 
-This project implements a fire detection system using the Rust programming language. 
-It utilises computer vision to detect fire in real-time and sends alerts to a specified email address when a fire is detected.
+This program is a real-time fire detection system using OpenCV and Rust. It processes video input from a camera to detect and track potential fire sources, with a focus on small, intense flames like those from a lighter.
 
 ## Features
 
-- Real-time fire detection using camera input
-- Email alerts when fire is detected
-- Logging of detection events to a database for monitoring and analysis
-- Built with Rust for high performance and safety
+- Real-time video processing
+- Fire detection using color thresholding and adaptive techniques
+- Fire tracking to reduce false positives
 
-## Prerequisites
+## Dependencies
 
-- Rust programming language (latest stable version)
-- Cargo package manager
-- LLVM and Clang libraries
-- (Add any other specific libraries or tools required)
+- OpenCV (with Rust bindings)
+- Rust standard library
+
+## Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant Main
+    participant Camera
+    participant FireTracker
+    participant FireDetection
+
+    Main->>Camera: Initialize
+    loop Every frame
+        Main->>Camera: Read frame
+        Camera-->>Main: Return frame
+        Main->>FireDetection: Process frame
+        FireDetection->>FireDetection: Convert to HSV
+        FireDetection->>FireDetection: Apply histogram equalization
+        FireDetection->>FireDetection: Apply color thresholding
+        FireDetection->>FireDetection: Apply adaptive thresholding
+        FireDetection->>FireDetection: Apply morphological operations
+        FireDetection->>FireDetection: Find contours
+        FireDetection->>FireTracker: Update with contours
+        FireTracker-->>FireDetection: Return fire detection status
+        FireDetection->>FireDetection: Draw bounding boxes (if fire detected)
+        FireDetection-->>Main: Return processed frame
+        Main->>Main: Display frame
+    end
+```
+
+## Steps of the Fire Detection Process
+
+1. **Video Capture**: The program initialises the camera and sets up a video capture stream.
+
+2. **Frame Processing**: For each captured frame:
+   a. Convert the frame from BGR to HSV color space.
+   b. Apply histogram equalisation to the V (brightness) channel to improve contrast.
+   c. Use color thresholding to isolate potential fire regions.
+   d. Apply adaptive thresholding to handle varying lighting conditions.
+   e. Use morphological operations (opening and closing) to reduce noise.
+
+3. **Contour Analysis**: Find contours in the processed image.
+
+4. **Fire Tracking**: Update the `FireTracker` with the found contours:
+   a. Identify the largest contour.
+   b. Calculate its centroid.
+   c. Compare the current position with the previous position.
+   d. Increment a counter if the fire seems stable (hasn't moved much).
+
+5. **Fire Detection**: If the fire has been stable for several frames:
+   a. Analyse each contour for area and aspect ratio.
+   b. Check the average intensity of the region.
+   c. If criteria are met, mark the region as a potential fire.
+
+6. **Visualisation**: Draw bounding boxes around detected fire regions.
+
+7. **Display**: Show the processed frame with any detected fire regions highlighted.
+
+8. **User Interface**: Allow the user to exit the program by pressing 'q'.
+
+## Usage
+
+1. Ensure all dependencies are installed.
+2. Run the program using `cargo run`.
+3. Point the camera at the area you want to monitor for fire.
+4. The program will display the video feed with any detected fire regions highlighted in red.
+5. Press 'q' to exit the program.
 
 ## Installation
 
@@ -84,3 +146,8 @@ It utilises computer vision to detect fire in real-time and sends alerts to a sp
 
 (Provide instructions on setting up and connecting to the database for logging)
 
+## Notes
+
+- The program is optimised for detecting small, intense flames like those from a lighter.
+- Adjustments to thresholds and parameters may be necessary for different environments or fire types.
+- This system should not be relied upon as a sole means of fire detection in safety-critical applications.
