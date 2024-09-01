@@ -134,18 +134,6 @@ sequenceDiagram
     cargo run
     ```
 
-## Usage
-
-(Add instructions on how to run the program, including any command-line arguments or configuration files needed)
-
-## Configuration
-
-(Explain how to configure the email alerts, adjust detection sensitivity, etc.)
-
-## Database Setup
-
-(Provide instructions on setting up and connecting to the database for logging)
-
 ## Notes
 
 - The program is optimised for detecting small, intense flames like those from a lighter.
